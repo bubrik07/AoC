@@ -144,13 +144,14 @@ def get_loop_cells(
     return visited_cells
 
 
-def get_results(
+def get_result(
         maze: list[list[str]],
         loop_cells: set[tuple[int, int]],
-) -> tuple[int, int]:
+) -> int:
     """
     Counts the number of '.' cells that are inside the enclosed loop.
     """
+
     maze = [
         "".join(
             symbol if (row_index, column_index) in loop_cells else EMPTY_CELL
@@ -212,10 +213,7 @@ def get_results(
             if not within:
                 outside.add((row_index, column_index))
 
-    return (
-        len(loop_cells) // 2,  # Maximum distance
-        len(maze) * len(maze[0]) - len(outside | loop_cells),  # Number of tiles
-    )
+    return len(maze) * len(maze[0]) - len(outside | loop_cells)  # Number of tiles
 
 
 def solve_pipe_maze(
@@ -257,7 +255,8 @@ def solve_pipe_maze(
         start_position=start_position,
     )
 
-    max_distance, tiles_number = get_results(
+    max_distance = len(loop_cells) // 2
+    tiles_number = get_result(
         maze=maze,
         loop_cells=loop_cells,
     )
