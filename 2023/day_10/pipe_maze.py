@@ -152,8 +152,10 @@ def get_results(
     Counts the number of '.' cells that are inside the enclosed loop.
     """
     maze = [
-        "".join(symbol if (row_index, column_index) in loop_cells else EMPTY_CELL for column_index, symbol in
-                enumerate(row))
+        "".join(
+            symbol if (row_index, column_index) in loop_cells else EMPTY_CELL
+            for column_index, symbol in enumerate(row)
+        )
         for row_index, row in enumerate(maze)
     ]
 
