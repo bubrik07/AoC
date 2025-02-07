@@ -31,6 +31,20 @@ def get_input_data(
         return [list(line) for line in file.read().strip().split("\n")]
 
 
+def save_maze_to_file(
+        maze: list[str],
+        filename: str,
+) -> None:
+    """
+    Saves the maze to a file
+    """
+
+    with open(filename, "w") as file:
+        for row in maze:
+            file.write(row + "\n")
+    print(f"Maze saved to {filename}")
+
+
 def find_start(
         maze: list[list[str]],
 ) -> tuple[int, int] | None:
@@ -142,6 +156,11 @@ def get_results(
                 enumerate(row))
         for row_index, row in enumerate(maze)
     ]
+
+    save_maze_to_file(
+        maze=maze,
+        filename="result.txt",
+    )
 
     outside: set = set()
 
